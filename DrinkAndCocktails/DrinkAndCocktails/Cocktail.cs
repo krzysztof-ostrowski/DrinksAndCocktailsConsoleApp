@@ -12,7 +12,6 @@
         foreach(var ingredient in Ingredients)
         {
             Console.WriteLine($"{ingredient.Ammount} {ingredient.AmmountType} {ingredient.Name}");
-            
         }
         Console.WriteLine(Recipe);
     }

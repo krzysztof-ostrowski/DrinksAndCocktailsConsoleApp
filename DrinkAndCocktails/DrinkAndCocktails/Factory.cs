@@ -10,7 +10,7 @@ namespace DrinkAndCocktails
     {
         public static Drink CreateDrink()
         {
-            Console.WriteLine("Enter drink name");
+            ConsoleMessages.GetNameMessage("drink");
             Drink drink = new Drink(GetName());
             Console.WriteLine("How much ingredients does your drink require?");
             int numberOfIngredients = GetNumberOfIngredients();
@@ -26,7 +26,7 @@ namespace DrinkAndCocktails
         }
         public static Cocktail CreateCocktail()
         {
-            Console.WriteLine("Enter cocktail name");
+            ConsoleMessages.GetNameMessage("cocktail");
             Cocktail cocktail = new Cocktail(GetName());
             Console.WriteLine("How much ingredients does your cocktail require?");
             int numberOfIngredients = GetNumberOfIngredients();
@@ -46,7 +46,7 @@ namespace DrinkAndCocktails
             {
                 if (!int.TryParse(Console.ReadLine(), out int ammount) || ammount < 0||ammount>10)
                 {
-                    Console.WriteLine("Enter thecorrect number");
+                    ConsoleMessages.CorrectNumberMessage();
                 }
                 else return ammount;
             }
@@ -59,34 +59,32 @@ namespace DrinkAndCocktails
         {
             Console.WriteLine("Enter ingredient name");
             string ingredientName = GetName();
-            string ingredientAmmountType = GetIngredientAmmountType();
+            IngredientType ingredientAmmountType = GetIngredientAmmountType();
             Ingredient ingredient = new Ingredient(ingredientName, ingredientAmmountType);
             Console.WriteLine($"Please enter the {ingredient.Name} ammount in {ingredient.AmmountType}:");
             ingredient.Ammount = GetIngredientAmmount();
             return ingredient;
 
         }
-        public static string GetIngredientAmmountType()
+        public static IngredientType GetIngredientAmmountType()
         {
-            Console.WriteLine("Chose ingredient ammount type:");
-            Console.WriteLine("1.ml");
-            Console.WriteLine("2.pieces");
-            Console.WriteLine("3.teaspoons");
-            Console.WriteLine("4.tablespoons");
+            ConsoleMessages.ChooseIngredientAmmountType();
             while (true)
             {
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        return "ml";
+                        return IngredientType.ml;
                     case "2":
-                        return "pieces";
+                        return IngredientType.pieces;
                     case "3":
-                        return "teaspoons";
+                        return IngredientType.whole;
                     case "4":
-                        return "tablespoons";
+                        return IngredientType.teaspoon;
+                    case "5":
+                        return IngredientType.tablespoon;
                     default:
-                        Console.WriteLine("Wrong number");
+                        ConsoleMessages.CorrectNumberMessage();
                         GetIngredientAmmountType();
                         break;
                 }
@@ -98,7 +96,7 @@ namespace DrinkAndCocktails
             {
                 if (!int.TryParse(Console.ReadLine(), out int ammount) || ammount < 0)
                 {
-                    Console.WriteLine("Enter thecorrect number");
+                    ConsoleMessages.CorrectNumberMessage();
                 }
                 else return ammount;
             }
